@@ -1,0 +1,17 @@
+{
+    "name": "worldfactory/cookbook",
+    "description": "Composer plugin to install library recipes.",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raphael Aurieres",
+            "email": "raphael.aurieres@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+        "composer/composer": "^1.7"
+    }
+}
