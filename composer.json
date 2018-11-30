@@ -10,8 +10,15 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
-    "require-dev": {
-        "composer/composer": "^1.7"
+    "require": {
+        "composer-plugin-api": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WorldFactory\\CookBook\\": "src/"
+        }
+    },
+    "extra": {
+        "class": "WorldFactory\\CookBook\\CookBookPlugin"
     }
 }
