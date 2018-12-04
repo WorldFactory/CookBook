@@ -1,24 +1,30 @@
 <?php
 
 namespace WorldFactory\CookBook;
+
 use Composer\Composer;
 use Composer\EventDispatcher\Event;
 use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Installer\PackageEvent;
+use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
+use Composer\Package\CompletePackage;
 use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PluginInterface;
 use Symfony\Component\Console\Helper\Table;
 
-class CookBookPlugin implements PluginInterface
+class CookBookPlugin implements PluginInterface, EventSubscriberInterface
 {
     /**
      * @var Composer
      */
     protected $composer;
+
     /**
      * @var IOInterface
      */
     protected $io;
+
     /**
      * @param Composer $composer
      * @param IOInterface $io
@@ -28,15 +34,18 @@ class CookBookPlugin implements PluginInterface
         $this->composer = $composer;
         $this->io = $io;
     }
+
     /**
      * @return array
      */
     public static function getSubscribedEvents()
     {
         return array(
-            PluginEvents::INIT => 'pluginDemoMethod'
+            PluginEvents::INIT => 'pluginDemoMethod',
+            PackageEvents::POST_PACKAGE_INSTALL => 'installRecipe'
         );
     }
+
     /**
      * @param Event $event
      */
@@ -45,5 +54,14 @@ class CookBookPlugin implements PluginInterface
         $this->io->write(PHP_EOL.'<options=bold>========= Demo plugin =========</>');
         $this->io->write('<info>Congrats, your plugin works! :)</info>');
         $this->io->write('<options=bold>===============================</>'.PHP_EOL);
+    }
+
+    public function installRecipe(PackageEvent $event)
+    {
+        /** @var CompletePackage $package */
+        $package = $event->getOperation()->getPackage();
+
+            var_dump($package->getDistUrl());
+//            \dump($this->composer);
     }
 }
