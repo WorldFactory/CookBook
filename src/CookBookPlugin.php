@@ -11,7 +11,8 @@ use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
 use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PluginInterface;
-use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
 
 class CookBookPlugin implements PluginInterface, EventSubscriberInterface
 {
@@ -61,7 +62,16 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
         /** @var CompletePackage $package */
         $package = $event->getOperation()->getPackage();
 
-            var_dump($package->getDistUrl());
-//            \dump($this->composer);
+        $this->dumpPackage($package);
+    }
+
+    private function dumpPackage(CompletePackage $package)
+    {
+        $dumper = new CliDumper();
+        $cloner = new VarCloner();
+
+        $cloner->setMaxItems(255);
+
+        $dumper->dump($cloner->cloneVar($package));
     }
 }
