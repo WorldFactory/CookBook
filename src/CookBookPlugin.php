@@ -11,6 +11,7 @@ use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
 use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PluginInterface;
+use Composer\Script\ScriptEvents;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 
@@ -46,7 +47,8 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
         return array(
             PluginEvents::INIT => 'pluginDemoMethod',
             PackageEvents::POST_PACKAGE_INSTALL => 'modifyPackage',
-            PackageEvents::POST_PACKAGE_UPDATE => 'modifyPackage'
+            PackageEvents::POST_PACKAGE_UPDATE => 'modifyPackage',
+            ScriptEvents::POST_AUTOLOAD_DUMP => 'autoloadGenerated'
         );
     }
 
@@ -67,6 +69,18 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
 
         if (!in_array($package, $this->modifiedPackages)) {
             $this->modifiedPackages[] = $package;
+        }
+    }
+
+    public function autoloadGenerated(Event $event)
+    {
+        require_once './vendor/autoload.php';
+
+        $cookbook = new CookBook($this->composer, $this->io);
+
+        /** @var CompletePackage $package */
+        foreach ($this->modifiedPackages as $package) {
+            $cookbook->installPackageRecipes($package);
         }
     }
 
