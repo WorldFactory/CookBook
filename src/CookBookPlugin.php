@@ -51,9 +51,9 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
      */
     public function pluginDemoMethod(Event $event)
     {
-        $this->io->write(PHP_EOL.'<options=bold>========= Demo plugin =========</>');
-        $this->io->write('<info>Congrats, your plugin works! :)</info>');
-        $this->io->write('<options=bold>===============================</>'.PHP_EOL);
+        $this->io->write(PHP_EOL . '<options=bold>=============== CookBook ===============</>');
+        $this->io->write(                  '<info>CookBook recipe installer is working! :)</info>');
+        $this->io->write(          '<options=bold>========================================</>' . PHP_EOL);
     }
 
     public function installRecipe(PackageEvent $event)
