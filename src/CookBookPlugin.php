@@ -26,6 +26,8 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
      */
     protected $io;
 
+    protected $modifiedPackages = [];
+
     /**
      * @param Composer $composer
      * @param IOInterface $io
@@ -43,7 +45,8 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     {
         return array(
             PluginEvents::INIT => 'pluginDemoMethod',
-            PackageEvents::POST_PACKAGE_INSTALL => 'installRecipe'
+            PackageEvents::POST_PACKAGE_INSTALL => 'modifyPackage',
+            PackageEvents::POST_PACKAGE_UPDATE => 'modifyPackage'
         );
     }
 
@@ -57,12 +60,14 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
         $this->io->write(          '<options=bold>========================================</>' . PHP_EOL);
     }
 
-    public function installRecipe(PackageEvent $event)
+    public function modifyPackage(PackageEvent $event)
     {
         /** @var CompletePackage $package */
         $package = $event->getOperation()->getPackage();
 
-        $this->dumpPackage($package);
+        if (!in_array($package, $this->modifiedPackages)) {
+            $this->modifiedPackages[] = $package;
+        }
     }
 
     private function dumpPackage(CompletePackage $package)
