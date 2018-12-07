@@ -15,7 +15,9 @@ class CookBook
     const RECIPE_FILE = './vendor/%s/recipe.json';
 
     const RECIPE_CLASSES = [
-        'copy-file' => 'WorldFactory\CookBook\Recipes\CopyFileRecipe'
+        'copy-file' => 'WorldFactory\CookBook\Recipes\CopyFileRecipe',
+        'chmod-file' => 'WorldFactory\CookBook\Recipes\ChmodFileRecipe',
+        'create-folder' => 'WorldFactory\CookBook\Recipes\CreateFolderRecipe'
     ];
 
     /**
