@@ -21,7 +21,11 @@ class ChmodFileRecipe extends AbstractRecipe
 
     protected function execute() : void
     {
-        chmod($this->config['target'], self::stringToOctal($this->config['mode']));
+        $result = chmod($this->config['target'], self::stringToOctal($this->config['mode']));
+
+        if (!$result) {
+            throw new Exception("Unable to set chmod {$this->config['mode']} to this file : '{$this->config['target']}'.");
+        }
     }
 
     /**
