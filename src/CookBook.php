@@ -2,11 +2,13 @@
 
 namespace WorldFactory\CookBook;
 
+use Exception;
 use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
 use Composer\Json\JsonFile;
 use WorldFactory\CookBook\Misc\RecipeFactory;
+use WorldFactory\CookBook\Recipes\AbstractRecipe;
 
 class CookBook
 {
@@ -29,6 +31,8 @@ class CookBook
     /** @var RecipeFactory */
     private $recipeFactory;
 
+    private $recipes = [];
+
     public function __construct(Composer $composer, IOInterface $io)
     {
         $this->composer = $composer;
@@ -41,12 +45,35 @@ class CookBook
         }
     }
 
+    private function displayHeader()
+    {
+        $this->io->write(PHP_EOL . '<options=bold>+--------------</> <error>CookBook</> <options=bold>--------------+</>');
+        $this->io->write('<options=bold>|</> <info>CookBook recipe installer is working</info> <options=bold>|</>');
+        $this->io->write('<options=bold>+--------------------------------------+</>');
+    }
+
     public function installPackageRecipes(CompletePackage $package)
     {
         $rawRecipes = $this->getRawRecipes($package->getName());
 
         foreach ($rawRecipes as $rawRecipe) {
-            $this->recipeFactory->buildRecipe($rawRecipe['type'], $rawRecipe, $package)->run();
+            $this->recipes[] = $this->recipeFactory->buildRecipe($rawRecipe['type'], $rawRecipe, $package);
+        }
+    }
+
+    public function run()
+    {
+        if (count($this->recipes) > 0) {
+            $this->displayHeader();
+
+            try {
+                /** @var AbstractRecipe $recipe */
+                foreach ($this->recipes as $recipe) {
+                    $recipe->run();
+                }
+            } catch (Exception $exception) {
+                $this->io->write("\e[91mERROR\e[39;49m : " . $exception->getMessage());
+            }
         }
     }
 

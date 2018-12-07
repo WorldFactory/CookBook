@@ -123,6 +123,8 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
         foreach ($this->installedPackages as $package) {
             $cookbook->installPackageRecipes($package);
         }
+
+        $cookbook->run();
     }
 
     private function dumpPackage(CompletePackage $package)
