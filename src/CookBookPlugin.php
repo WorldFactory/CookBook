@@ -3,6 +3,9 @@
 namespace WorldFactory\CookBook;
 
 use Composer\Composer;
+use Composer\DependencyResolver\Operation\InstallOperation;
+use Composer\DependencyResolver\Operation\UninstallOperation;
+use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\EventDispatcher\Event;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Installer\PackageEvent;
@@ -27,7 +30,9 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
      */
     protected $io;
 
-    protected $modifiedPackages = [];
+    protected $installedPackages = [];
+    protected $updatedPackages = [];
+    protected $deletedPackages = [];
 
     /**
      * @param Composer $composer
@@ -46,8 +51,9 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     {
         return array(
             PluginEvents::INIT => 'pluginDemoMethod',
-            PackageEvents::POST_PACKAGE_INSTALL => 'modifyPackage',
-            PackageEvents::POST_PACKAGE_UPDATE => 'modifyPackage',
+            PackageEvents::POST_PACKAGE_INSTALL => 'installPackage',
+            PackageEvents::POST_PACKAGE_UPDATE => 'updatePackage',
+            PackageEvents::POST_PACKAGE_UNINSTALL => 'removePackage',
             ScriptEvents::POST_AUTOLOAD_DUMP => 'autoloadGenerated'
         );
     }
@@ -62,13 +68,42 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
         $this->io->write(          '<options=bold>========================================</>' . PHP_EOL);
     }
 
-    public function modifyPackage(PackageEvent $event)
+    public function installPackage(PackageEvent $event)
     {
-        /** @var CompletePackage $package */
-        $package = $event->getOperation()->getPackage();
+        /** @var InstallOperation $operation */
+        $operation = $event->getOperation();
 
-        if (!in_array($package, $this->modifiedPackages)) {
-            $this->modifiedPackages[] = $package;
+        /** @var CompletePackage $package */
+        $package = $operation->getPackage();
+
+        if (!in_array($package, $this->installedPackages)) {
+            $this->installedPackages[] = $package;
+        }
+    }
+
+    public function updatePackage(PackageEvent $event)
+    {
+        /** @var UpdateOperation $operation */
+        $operation = $event->getOperation();
+
+        /** @var CompletePackage $package */
+        $package = $operation->getTargetPackage();
+
+        if (!in_array($package, $this->updatedPackages)) {
+            $this->updatedPackages[] = $package;
+        }
+    }
+
+    public function removePackage(PackageEvent $event)
+    {
+        /** @var UninstallOperation $operation */
+        $operation = $event->getOperation();
+
+        /** @var CompletePackage $package */
+        $package = $operation->getPackage();
+
+        if (!in_array($package, $this->deletedPackages)) {
+            $this->deletedPackages[] = $package;
         }
     }
 
@@ -79,7 +114,7 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
         $cookbook = new CookBook($this->composer, $this->io);
 
         /** @var CompletePackage $package */
-        foreach ($this->modifiedPackages as $package) {
+        foreach ($this->installedPackages as $package) {
             $cookbook->installPackageRecipes($package);
         }
     }
