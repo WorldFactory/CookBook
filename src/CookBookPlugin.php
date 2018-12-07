@@ -20,6 +20,10 @@ use Symfony\Component\VarDumper\Dumper\CliDumper;
 
 class CookBookPlugin implements PluginInterface, EventSubscriberInterface
 {
+    public static $isHeaderDisplayed = false;
+
+    const VERSION = 'v0.1';
+
     /**
      * @var Composer
      */
@@ -50,7 +54,7 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            PluginEvents::INIT => 'pluginDemoMethod',
+            PluginEvents::INIT => 'pluginInit',
             PackageEvents::POST_PACKAGE_INSTALL => 'installPackage',
             PackageEvents::POST_PACKAGE_UPDATE => 'updatePackage',
             PackageEvents::POST_PACKAGE_UNINSTALL => 'removePackage',
@@ -61,11 +65,13 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     /**
      * @param Event $event
      */
-    public function pluginDemoMethod(Event $event)
+    public function pluginInit(Event $event)
     {
-        $this->io->write(PHP_EOL . '<options=bold>=============== CookBook ===============</>');
-        $this->io->write(                  '<info>CookBook recipe installer is working! :)</info>');
-        $this->io->write(          '<options=bold>========================================</>' . PHP_EOL);
+        if (!CookBookPlugin::$isHeaderDisplayed) {
+            $this->io->write('<options=bold>CookBook</> - ' . self::VERSION . ' is activated.');
+
+            CookBookPlugin::$isHeaderDisplayed = true;
+        }
     }
 
     public function installPackage(PackageEvent $event)
