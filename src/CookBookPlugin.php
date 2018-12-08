@@ -68,7 +68,7 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     public function pluginInit(Event $event)
     {
         if (!CookBookPlugin::$isHeaderDisplayed) {
-            $this->io->write('<options=bold>CookBook</> - ' . self::VERSION . ' is activated.');
+            $this->io->write('<options=bold>CookBook</> - ' . self::VERSION . ' is in da place!');
 
             CookBookPlugin::$isHeaderDisplayed = true;
         }
