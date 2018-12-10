@@ -20,7 +20,7 @@ abstract class AbstractRecipe
 
     protected $package;
 
-    public function __construct(IOInterface $io, array $config = [], $package)
+    public function __construct(IOInterface $io, $package, array $config = [])
     {
         $this->io = $io;
         $this->config = $config;

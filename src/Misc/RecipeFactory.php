@@ -28,11 +28,12 @@ class RecipeFactory
         return array_key_exists($name, $this->recipes);
     }
 
-    public function buildRecipe(string $name, array $config = [], $package)
+    public function buildRecipe($package, array $config)
     {
+        $name = $config['type'];
         $className = $this->recipes[$name];
 
-        $recipe = new $className($this->io, $config, $package);
+        $recipe = new $className($this->io, $package, $config);
 
         return $recipe;
     }

@@ -59,7 +59,7 @@ class CookBook
         $rawRecipes = $this->getRawRecipes($package->getName());
 
         foreach ($rawRecipes as $rawRecipe) {
-            $this->recipes[] = $this->recipeFactory->buildRecipe($rawRecipe['type'], $rawRecipe, $package);
+            $this->recipes[] = $this->recipeFactory->buildRecipe($package, $rawRecipe);
         }
     }
 
