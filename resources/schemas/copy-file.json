@@ -1,0 +1,53 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "recipe:copy-file",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "type",
+    "source",
+    "target"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The Type Schema",
+      "default": "",
+      "examples": [
+        "copy-file"
+      ],
+      "pattern": "^copy-file$"
+    },
+    "source": {
+      "$id": "#/properties/source",
+      "type": "string",
+      "title": "The Source Schema",
+      "default": "",
+      "examples": [
+        "recipe/extension-1.md"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "target": {
+      "$id": "#/properties/target",
+      "type": "string",
+      "title": "The Target Schema",
+      "default": "",
+      "examples": [
+        "extension-1.md"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "force": {
+      "$id": "#/properties/force",
+      "type": "boolean",
+      "title": "The Force Schema",
+      "default": false,
+      "examples": [
+        true
+      ]
+    }
+  }
+}

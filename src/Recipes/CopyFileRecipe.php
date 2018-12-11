@@ -38,4 +38,9 @@ class CopyFileRecipe extends AbstractRecipe
     {
         return array_key_exists('force', $this->config) && ($this->config['force'] === true);
     }
+
+    protected function getSchemaFilename() :? string
+    {
+        return __DIR__ . '/../../resources/schemas/copy-file.json';
+    }
 }
