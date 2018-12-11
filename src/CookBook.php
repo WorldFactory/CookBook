@@ -17,7 +17,8 @@ class CookBook
     const RECIPE_CLASSES = [
         'copy-file' => 'WorldFactory\CookBook\Recipes\CopyFileRecipe',
         'chmod-file' => 'WorldFactory\CookBook\Recipes\ChmodFileRecipe',
-        'create-folder' => 'WorldFactory\CookBook\Recipes\CreateFolderRecipe'
+        'create-folder' => 'WorldFactory\CookBook\Recipes\CreateFolderRecipe',
+        'display-message' => 'WorldFactory\CookBook\Recipes\DisplayMessageRecipe'
     ];
 
     /**
