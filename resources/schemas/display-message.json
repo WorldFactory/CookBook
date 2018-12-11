@@ -1,0 +1,32 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "recipe:display-message",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "type",
+    "output"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The Type Schema",
+      "examples": [
+        "display-message"
+      ],
+      "pattern": "^display-message$"
+    },
+    "output": {
+      "$id": "#/properties/$output",
+      "type": ["string", "array"],
+      "title": "The Output Schema",
+      "examples": [
+        "message",
+        ["line_1", "line_2"]
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}
