@@ -42,4 +42,9 @@ class CreateFolderRecipe extends AbstractRecipe
 
         return octdec((int) $value);
     }
+
+    protected function getSchemaFilename() :? string
+    {
+        return __DIR__ . '/../../resources/schemas/create-folder.json';
+    }
 }

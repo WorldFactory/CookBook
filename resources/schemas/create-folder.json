@@ -1,0 +1,41 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "recipe:create-folder",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "type",
+    "target"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The Type Schema",
+      "default": "",
+      "examples": [
+        "copy-file"
+      ],
+      "pattern": "^create-folder$"
+    },
+    "target": {
+      "$id": "#/properties/target",
+      "type": "string",
+      "title": "The Target Schema",
+      "default": "",
+      "examples": [
+        "extension"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "mode": {
+      "$id": "#/properties/mode",
+      "type": "integer",
+      "title": "The Force Schema",
+      "examples": [
+        776
+      ]
+    }
+  }
+}
