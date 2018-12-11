@@ -6,6 +6,11 @@ use Exception;
 
 class CopyFileRecipe extends AbstractRecipe
 {
+    protected function getName() : string
+    {
+        return 'copy-file';
+    }
+
     protected function getText() : string
     {
         $target = $this->config['target'];

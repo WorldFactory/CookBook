@@ -6,6 +6,11 @@ use Exception;
 
 class CreateFolderRecipe extends AbstractRecipe
 {
+    protected function getName() : string
+    {
+        return 'create-folder';
+    }
+
     protected function getText() : string
     {
         $target = $this->config['target'];

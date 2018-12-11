@@ -44,6 +44,7 @@ abstract class AbstractRecipe
         }
     }
 
+    abstract protected function getName() : string;
     abstract protected function getText() : string;
     abstract protected function todo() : bool;
     abstract protected function execute() : void;

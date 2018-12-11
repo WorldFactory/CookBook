@@ -6,6 +6,11 @@ use Exception;
 
 class ChmodFileRecipe extends AbstractRecipe
 {
+    protected function getName() : string
+    {
+        return 'chmod-file';
+    }
+
     protected function getText() : string
     {
         $target = $this->config['target'];
