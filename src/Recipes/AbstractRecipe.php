@@ -13,6 +13,8 @@ abstract class AbstractRecipe
     const STATE_OK = "\e[30;102m OK \e[39;49m";
     const STATE_ERROR = "\e[30;103m ERROR \e[39;49m";
 
+    const DISPLAY_EXECUTION = true;
+
     /** @var array */
     protected $config;
 
@@ -40,12 +42,21 @@ abstract class AbstractRecipe
     public function run()
     {
         if ($this->todo()) {
-            $this->io->write($this->getText(), false);
+            if (static::DISPLAY_EXECUTION) {
+                $this->io->write($this->getText(), false);
+            }
+
             try {
                 $this->execute();
-                $this->io->write(self::STATE_OK);
+
+                if (static::DISPLAY_EXECUTION) {
+                    $this->io->write(self::STATE_OK);
+                }
             } catch (Exception $exception) {
-                $this->io->write(self::STATE_ERROR);
+                if (static::DISPLAY_EXECUTION) {
+                    $this->io->write(self::STATE_ERROR);
+                }
+
                 throw $exception;
             }
         }
