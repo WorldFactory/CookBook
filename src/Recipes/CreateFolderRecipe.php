@@ -6,10 +6,7 @@ use Exception;
 
 class CreateFolderRecipe extends AbstractRecipe
 {
-    protected function getName() : string
-    {
-        return 'create-folder';
-    }
+    const NAME = 'create-folder';
 
     protected function getText() : string
     {

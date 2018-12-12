@@ -6,10 +6,7 @@ use Exception;
 
 class ChmodFileRecipe extends AbstractRecipe
 {
-    protected function getName() : string
-    {
-        return 'chmod-file';
-    }
+    const NAME = 'chmod-file';
 
     protected function getText() : string
     {

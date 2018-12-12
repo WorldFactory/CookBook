@@ -6,10 +6,7 @@ use Exception;
 
 class CopyFileRecipe extends AbstractRecipe
 {
-    protected function getName() : string
-    {
-        return 'copy-file';
-    }
+    const NAME = 'copy-file';
 
     protected function getText() : string
     {

@@ -4,6 +4,8 @@ namespace WorldFactory\CookBook\Recipes;
 
 class DisplayMessageRecipe extends AbstractRecipe
 {
+    const NAME = 'display-message';
+
     const COLOR_BORDER = "\e[43;90m";
     const COLOR_OUTPUT = "\e[43;30m";
     const COLOR_DEFAULT = "\e[0m";
@@ -14,11 +16,6 @@ class DisplayMessageRecipe extends AbstractRecipe
     const CHAR_SPACE = ' ';
 
     const DISPLAY_EXECUTION = false;
-
-    protected function getName() : string
-    {
-        return 'display-message';
-    }
 
     protected function getText() : string
     {

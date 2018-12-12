@@ -15,6 +15,8 @@ abstract class AbstractRecipe
 
     const DISPLAY_EXECUTION = true;
 
+    const NAME = null;
+
     /** @var array */
     protected $config;
 
@@ -62,7 +64,15 @@ abstract class AbstractRecipe
         }
     }
 
-    abstract protected function getName() : string;
+    public function getName() : string
+    {
+        if (static::NAME === null) {
+            throw new \LogicException("Recipe must have valid name.");
+        }
+
+        return static::NAME;
+    }
+
     abstract protected function getText() : string;
     abstract protected function todo() : bool;
     abstract protected function execute() : void;
