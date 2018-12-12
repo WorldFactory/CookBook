@@ -15,8 +15,6 @@ class DisplayMessageRecipe extends AbstractRecipe
     const CHAR_HLINE = '-';
     const CHAR_SPACE = ' ';
 
-    const DISPLAY_EXECUTION = false;
-
     protected function getText() : string
     {
         return null;
@@ -25,6 +23,14 @@ class DisplayMessageRecipe extends AbstractRecipe
     protected function todo() : bool
     {
        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function run()
+    {
+        $this->execute();
     }
 
     protected function execute() : void
