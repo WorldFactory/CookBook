@@ -3,7 +3,13 @@ Composer plugin to execute library recipes.
 
 CAUTION !! This libary is in alpha version !!
 
-Add 'recipe.json' file in library root directory :
+## How to use it
+
+Add cookbook to the composer.json file of your library.
+
+```composer require worldfactory/cookbook``` 
+
+Add 'recipe.json' file in the root directory of your library :
 
 ```
 {
@@ -35,4 +41,13 @@ Add 'recipe.json' file in library root directory :
   ]
 }
 ```
- More recipe type comming soon...
+
+All configured actions will be executed when your library is installed !! ;)
+
+## Comming soon
+
+ * More recipe types. (Symfony and composer hooks integration)
+ * Test property to condition recipe execution.
+ * Input from user.
+  
+ [Trello development tab.](https://trello.com/b/0YAPil3f/cookbook)
