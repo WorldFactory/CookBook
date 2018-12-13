@@ -1,7 +1,7 @@
 # CookBook
 Composer plugin to execute library recipes.
 
-CAUTION !! This libary is in alpha version !!
+CAUTION !! This library is in alpha version !!
 
 ## How to use it
 
@@ -44,7 +44,7 @@ Add 'recipe.json' file in the root directory of your library :
 
 All configured actions will be executed when your library is installed !! ;)
 
-## Comming soon
+## Coming soon
 
  * More recipe types. (Symfony and composer hooks integration)
  * Test property to condition recipe execution.
