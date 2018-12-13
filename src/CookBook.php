@@ -6,7 +6,6 @@ use Exception;
 use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
-use function is_object;
 use WorldFactory\CookBook\Misc\JsonFile;
 use WorldFactory\CookBook\Misc\RecipeFactory;
 use WorldFactory\CookBook\Recipes\AbstractRecipe;
