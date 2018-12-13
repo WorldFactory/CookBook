@@ -81,14 +81,19 @@ class CookBook
         }
     }
 
+    /**
+     * @param string $packageName
+     * @return array
+     * @throws \Composer\Json\JsonValidationException
+     */
     private function getRawRecipes(string $packageName)
     {
         $rawRecipes = [];
         $filename = sprintf(self::RECIPE_FILE, $packageName);
         $file = new JsonFile($filename, null, $this->io);
         if ($file->exists()) {
-            $config = $file->read();
-            if (is_object($config) && property_exists($config,'actions')) {
+            if ($file->validateSchema(JsonFile::STRICT_SCHEMA, __DIR__ . '/../resources/schemas/root.json')) {
+                $config = $file->read();
                 $rawRecipes = $config->actions;
             }
         }

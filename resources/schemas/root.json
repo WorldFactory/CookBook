@@ -1,0 +1,70 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "cookbook:root",
+  "type": "object",
+  "title": "The Root Schema of CookBook files",
+  "required": [
+    "actions"
+  ],
+  "properties": {
+    "actions": {
+      "$id": "#/properties/actions",
+      "type": "array",
+      "title": "The actions list",
+      "examples": [
+        [{}, {}]
+      ],
+      "items": {
+        "$id": "#/properties/actions/items",
+        "type": "object",
+        "title": "The recipe actions",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$id": "#/properties/actions/items/properties/type",
+            "type": "string",
+            "title": "The type of the recipe",
+            "examples": [
+              "copy-file"
+            ],
+            "pattern": "^([a-z-]*)$"
+          }
+        }
+      }
+    },
+    "recipe": {
+      "$id": "#/properties/recipe",
+      "type": "object",
+      "title": "The recipe type object",
+      "required": [
+        "type",
+        "version"
+      ],
+      "properties": {
+        "type": {
+          "$id": "#/properties/recipe/properties/type",
+          "type": "string",
+          "title": "The type of recipe list",
+          "examples": [
+            "cookbook",
+            "openrecipe",
+            "flex ;)"
+          ]
+        },
+        "version": {
+          "$id": "#/properties/recipe/properties/version",
+          "type": ["string", "integer"],
+          "title": "The version of the type of recipe list",
+          "examples": [
+            1,
+            "1.2",
+            "2"
+          ]
+        }
+      }
+    }
+  }
+}
