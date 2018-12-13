@@ -6,7 +6,8 @@ use Exception;
 use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
-use Composer\Json\JsonFile;
+use function is_object;
+use WorldFactory\CookBook\Misc\JsonFile;
 use WorldFactory\CookBook\Misc\RecipeFactory;
 use WorldFactory\CookBook\Recipes\AbstractRecipe;
 
@@ -87,8 +88,8 @@ class CookBook
         $file = new JsonFile($filename, null, $this->io);
         if ($file->exists()) {
             $config = $file->read();
-            if (is_array($config) && array_key_exists('actions', $config)) {
-                $rawRecipes = $config['actions'];
+            if (is_object($config) && property_exists($config,'actions')) {
+                $rawRecipes = $config->actions;
             }
         }
 

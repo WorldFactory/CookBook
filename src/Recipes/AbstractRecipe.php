@@ -7,6 +7,7 @@ use Composer\IO\IOInterface;
 use function file_exists;
 use JsonSchema\Validator;
 use Composer\Json\JsonValidationException;
+use stdClass;
 
 abstract class AbstractRecipe
 {
@@ -15,7 +16,7 @@ abstract class AbstractRecipe
 
     const NAME = null;
 
-    /** @var array */
+    /** @var stdClass */
     protected $config;
 
     /**
@@ -25,14 +26,21 @@ abstract class AbstractRecipe
 
     protected $package;
 
-    public function __construct(IOInterface $io, $package, array $config = [])
+    /**
+     * AbstractRecipe constructor.
+     * @param IOInterface $io
+     * @param $package
+     * @param stdClass $config
+     * @throws Exception
+     * @throws JsonValidationException
+     */
+    public function __construct(IOInterface $io, $package, stdClass $config)
     {
         $this->io = $io;
-        $this->config = $config;
         $this->package = $package;
 
-        if ($this->getSchemaFilename() !== null) {
-            $this->validate();
+        if ($this->validate($config)) {
+            $this->config = json_decode(json_encode($config), true);
         }
     }
 
@@ -76,7 +84,7 @@ abstract class AbstractRecipe
      * @throws Exception
      * @throws JsonValidationException
      */
-    protected function validate()
+    protected function validate(stdClass $config) : bool
     {
         $schemaFile = realpath($this->getSchemaFilename());
 
@@ -84,15 +92,9 @@ abstract class AbstractRecipe
             throw new Exception("File not found : '$schemaFile'.");
         }
 
-        // Prepend with file:// only when not using a special schema already (e.g. in the phar)
-        if (false === strpos($schemaFile, '://')) {
-            $schemaFile = 'file://' . $schemaFile;
-        }
-
         $schemaData = (object) ['$ref' => $schemaFile];
 
         $validator = new Validator();
-        $config = $validator::arrayToObjectRecursive($this->config);
         $validator->check($config, $schemaData);
 
         if (!$validator->isValid()) {

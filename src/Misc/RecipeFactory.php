@@ -3,6 +3,7 @@
 namespace WorldFactory\CookBook\Misc;
 
 use Composer\IO\IOInterface;
+use stdClass;
 
 class RecipeFactory
 {
@@ -28,9 +29,9 @@ class RecipeFactory
         return array_key_exists($name, $this->recipes);
     }
 
-    public function buildRecipe($package, array $config)
+    public function buildRecipe($package, stdClass $config)
     {
-        $name = $config['type'];
+        $name = $config->type;
         $className = $this->recipes[$name];
 
         $recipe = new $className($this->io, $package, $config);
