@@ -5,7 +5,8 @@
   "type": "object",
   "title": "The Root Schema of CookBook files",
   "required": [
-    "actions"
+    "actions",
+    "recipe"
   ],
   "properties": {
     "actions": {
