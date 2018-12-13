@@ -94,7 +94,12 @@ class CookBook
         if ($file->exists()) {
             if ($file->validateSchema(JsonFile::STRICT_SCHEMA, __DIR__ . '/../resources/schemas/root.json')) {
                 $config = $file->read();
-                $rawRecipes = $config->actions;
+
+                if ($config->recipe->type === 'cookbook') {
+                    $rawRecipes = $config->actions;
+                } elseif ($this->io->isVeryVerbose()) {
+                    $this->io->write("$packageName has recipe.json file, but not of cookbook type.");
+                }
             }
         }
 
