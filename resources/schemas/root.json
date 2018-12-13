@@ -66,6 +66,42 @@
           ]
         }
       }
+    },
+    "meta": {
+      "$id": "#/properties/meta",
+      "type": "object",
+      "title": "An object to add optional recipe meta-data.",
+      "required": [],
+      "properties": {
+        "author": {
+          "$id": "#/properties/meta/properties/type",
+          "type": ["string", "array"],
+          "title": "The author(s) of the recipe list",
+          "examples": [
+            "Raphaël Aurières",
+            "Raphaël Aurières <raphael.aurieres@gmail.com>",
+            ["Raphaël Aurières", "Another person"]
+          ]
+        },
+        "description": {
+          "$id": "#/properties/meta/properties/description",
+          "type": "string",
+          "title": "A description of the recipes.",
+          "examples": [
+            "A description of the recipe list."
+          ]
+        },
+        "version": {
+          "$id": "#/properties/meta/properties/version",
+          "type": ["string", "integer"],
+          "title": "The version of the recipes.",
+          "examples": [
+            1,
+            "1.2",
+            "2"
+          ]
+        }
+      }
     }
   }
 }
