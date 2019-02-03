@@ -124,6 +124,11 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
             $cookbook->installPackageRecipes($package);
         }
 
+        /** @var CompletePackage $package */
+        foreach ($this->updatedPackages as $package) {
+            $cookbook->installPackageRecipes($package);
+        }
+
         $cookbook->run();
     }
 
