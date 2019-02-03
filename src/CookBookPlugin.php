@@ -22,7 +22,7 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
 {
     public static $isHeaderDisplayed = false;
 
-    const VERSION = 'v0.2.1';
+    const VERSION = 'v0.2.2';
 
     /**
      * @var Composer
