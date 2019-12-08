@@ -99,7 +99,11 @@ class CookBook
                 } elseif ($this->io->isVeryVerbose()) {
                     $this->io->write("$packageName has recipe.json file, but not of cookbook type.");
                 }
+            } elseif ($this->io->isVeryVerbose()) {
+                $this->io->write("$packageName has invalid recipe.json file.");
             }
+        } elseif ($this->io->isVeryVerbose()) {
+            $this->io->write("$packageName has not recipe.json file.");
         }
 
         return $rawRecipes;
