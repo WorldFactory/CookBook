@@ -92,10 +92,10 @@ abstract class AbstractRecipe
             throw new Exception("File not found : '$schemaFile'.");
         }
 
-        $schemaData = (object) ['$ref' => $schemaFile];
+        $schemaData = (object) ['$ref' => "file://$schemaFile"];
 
         $validator = new Validator();
-        $validator->check($config, $schemaData);
+        $validator->validate($config, $schemaData);
 
         if (!$validator->isValid()) {
             $errors = (array) $validator->getErrors();
