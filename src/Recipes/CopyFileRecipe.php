@@ -3,6 +3,7 @@
 namespace WorldFactory\CookBook\Recipes;
 
 use Exception;
+use WorldFactory\CookBook\Foundations\AbstractRecipe;
 
 class CopyFileRecipe extends AbstractRecipe
 {

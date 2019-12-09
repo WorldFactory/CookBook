@@ -2,6 +2,8 @@
 
 namespace WorldFactory\CookBook\Recipes;
 
+use WorldFactory\CookBook\Foundations\AbstractRecipe;
+
 class DisplayMessageRecipe extends AbstractRecipe
 {
     const NAME = 'display-message';

@@ -1,6 +1,6 @@
 <?php
 
-namespace WorldFactory\CookBook\Recipes;
+namespace WorldFactory\CookBook\Foundations;
 
 use Exception;
 use Composer\IO\IOInterface;

@@ -8,7 +8,7 @@ use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
 use WorldFactory\CookBook\Misc\JsonFile;
 use WorldFactory\CookBook\Misc\RecipeFactory;
-use WorldFactory\CookBook\Recipes\AbstractRecipe;
+use WorldFactory\CookBook\Foundations\AbstractRecipe;
 
 class CookBook
 {
