@@ -7,6 +7,7 @@ use WorldFactory\CookBook\Foundations\AbstractRecipe;
 class DisplayMessageRecipe extends AbstractRecipe
 {
     const NAME = 'display-message';
+    const PRIORITY = 1;
 
     const COLOR_BORDER = "\e[43;90m";
     const COLOR_OUTPUT = "\e[43;30m";

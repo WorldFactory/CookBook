@@ -70,6 +70,15 @@ abstract class AbstractRecipe
         return static::NAME;
     }
 
+    public function getPriority() : int
+    {
+        if (static::PRIORITY === null) {
+            throw new \LogicException("Recipe must have valid priority.");
+        }
+
+        return static::PRIORITY;
+    }
+
     abstract protected function getText() : string;
     abstract protected function todo() : bool;
     abstract protected function execute() : void;

@@ -8,6 +8,7 @@ use WorldFactory\CookBook\Foundations\AbstractRecipe;
 class CopyFileRecipe extends AbstractRecipe
 {
     const NAME = 'copy-file';
+    const PRIORITY = 10;
 
     protected function getText() : string
     {

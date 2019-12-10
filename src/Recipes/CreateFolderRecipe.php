@@ -8,6 +8,7 @@ use WorldFactory\CookBook\Foundations\AbstractRecipe;
 class CreateFolderRecipe extends AbstractRecipe
 {
     const NAME = 'create-folder';
+    const PRIORITY = 15;
 
     protected function getText() : string
     {
