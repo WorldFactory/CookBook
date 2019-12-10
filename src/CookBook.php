@@ -19,7 +19,8 @@ class CookBook
         'copy-file' => 'WorldFactory\CookBook\Recipes\CopyFileRecipe',
         'chmod-file' => 'WorldFactory\CookBook\Recipes\ChmodFileRecipe',
         'create-folder' => 'WorldFactory\CookBook\Recipes\CreateFolderRecipe',
-        'display-message' => 'WorldFactory\CookBook\Recipes\DisplayMessageRecipe'
+        'display-message' => 'WorldFactory\CookBook\Recipes\DisplayMessageRecipe',
+        'import-qq' => 'WorldFactory\CookBook\Recipes\ImportQQRecipe'
     ];
 
     /**
