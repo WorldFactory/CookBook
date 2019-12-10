@@ -119,17 +119,22 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
 
         $cookbook = new CookBook($this->composer, $this->io);
 
-        /** @var CompletePackage $package */
-        foreach ($this->installedPackages as $package) {
-            $cookbook->installPackageRecipes($package);
-        }
-
-        /** @var CompletePackage $package */
-        foreach ($this->updatedPackages as $package) {
-            $cookbook->installPackageRecipes($package);
-        }
+        $this->installPackageRecipes($cookbook, $this->installedPackages);
+        $this->installPackageRecipes($cookbook, $this->updatedPackages);
 
         $cookbook->run();
+    }
+
+    /**
+     * @param CookBook $cookbook
+     * @param array $packages
+     */
+    private function installPackageRecipes(CookBook $cookbook, array $packages)
+    {
+        /** @var CompletePackage $package */
+        foreach ($packages as $package) {
+            $cookbook->installPackageRecipes($package);
+        }
     }
 
     private function dumpPackage(CompletePackage $package)
