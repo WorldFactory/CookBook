@@ -5,6 +5,7 @@ namespace WorldFactory\CookBook\Foundations;
 use Exception;
 use Composer\IO\IOInterface;
 use function file_exists;
+use Composer\Package\PackageInterface;
 use JsonSchema\Validator;
 use Composer\Json\JsonValidationException;
 use stdClass;
@@ -24,17 +25,18 @@ abstract class AbstractRecipe
      */
     protected $io;
 
+    /** @var PackageInterface */
     protected $package;
 
     /**
      * AbstractRecipe constructor.
      * @param IOInterface $io
-     * @param $package
+     * @param PackageInterface $package
      * @param stdClass $config
      * @throws Exception
      * @throws JsonValidationException
      */
-    public function __construct(IOInterface $io, $package, stdClass $config)
+    public function __construct(IOInterface $io, PackageInterface $package, stdClass $config)
     {
         $this->io = $io;
         $this->package = $package;
