@@ -2,13 +2,13 @@
 
 namespace WorldFactory\CookBook\Foundations;
 
+use stdClass;
 use Exception;
-use Composer\IO\IOInterface;
 use function file_exists;
 use Composer\Package\PackageInterface;
-use JsonSchema\Validator;
+use Composer\IO\IOInterface;
 use Composer\Json\JsonValidationException;
-use stdClass;
+use JsonSchema\Validator;
 
 abstract class AbstractRecipe
 {
@@ -20,9 +20,7 @@ abstract class AbstractRecipe
     /** @var stdClass */
     protected $config;
 
-    /**
-     * @var IOInterface
-     */
+    /** @var IOInterface */
     protected $io;
 
     /** @var PackageInterface */
