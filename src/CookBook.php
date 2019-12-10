@@ -74,6 +74,16 @@ class CookBook
         if (count($this->recipes) > 0) {
             $this->displayHeader();
 
+            usort($this->recipes, function(AbstractRecipe $r1, AbstractRecipe $r2) {
+                if ($r1->getPriority() > $r2->getPriority()) {
+                    return -1;
+                } elseif ($r1->getPriority() < $r2->getPriority()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+
             try {
                 /** @var AbstractRecipe $recipe */
                 foreach ($this->recipes as $recipe) {
