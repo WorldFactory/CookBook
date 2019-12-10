@@ -1,0 +1,34 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "recipe:import-qq",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "type",
+    "source",
+    "target"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The Type Schema",
+      "default": "",
+      "examples": [
+        "import-qq"
+      ],
+      "pattern": "^import-qq$"
+    },
+    "source": {
+      "$id": "#/properties/source",
+      "type": "string",
+      "title": "The Source Schema",
+      "default": "",
+      "examples": [
+        "resources/commands.yml"
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}
