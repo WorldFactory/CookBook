@@ -8,7 +8,7 @@ use WorldFactory\CookBook\Foundations\AbstractRecipe;
 class ChmodFileRecipe extends AbstractRecipe
 {
     const NAME = 'chmod-file';
-    const PRIORITY = 1;
+    const PRIORITY = 2;
 
     protected function getText() : string
     {
