@@ -99,8 +99,7 @@ abstract class AbstractRecipe
 
         if (!$validator->isValid()) {
             $errors = (array) $validator->getErrors();
-            $error = current($errors);
-            $errorText = "Error in recipe '{$this->getName()}'" . ($error['property'] ? " for property '{$error['property']}'" : '') . " : {$error['message']}";
+            $errorText = "Error in recipe '{$this->getName()}'";
             throw new JsonValidationException($errorText, $errors);
         }
 

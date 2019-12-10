@@ -11,6 +11,7 @@ use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Installer\PackageEvent;
 use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
+use Composer\Json\JsonValidationException;
 use Composer\Package\CompletePackage;
 use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PluginInterface;
@@ -133,7 +134,14 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     {
         /** @var CompletePackage $package */
         foreach ($packages as $package) {
-            $cookbook->installPackageRecipes($package);
+            try {
+                $cookbook->installPackageRecipes($package);
+            } catch (JsonValidationException $exception) {
+                $this->io->write("<error>Recipe validation errors in {$package->getName()} :</error>");
+                foreach($exception->getErrors() as $error) {
+                    $this->io->write("-> <error>$error</error>");
+                }
+            }
         }
     }
 

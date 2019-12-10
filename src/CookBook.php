@@ -6,6 +6,7 @@ use Exception;
 use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
+use Composer\Json\JsonValidationException;
 use WorldFactory\CookBook\Misc\JsonFile;
 use WorldFactory\CookBook\Misc\RecipeFactory;
 use WorldFactory\CookBook\Foundations\AbstractRecipe;
@@ -55,6 +56,10 @@ class CookBook
         $this->io->write('<options=bold>+--------------------------------------+</>');
     }
 
+    /**
+     * @param CompletePackage $package
+     * @throws JsonValidationException
+     */
     public function installPackageRecipes(CompletePackage $package)
     {
         $rawRecipes = $this->getRawRecipes($package->getName());
@@ -83,7 +88,7 @@ class CookBook
     /**
      * @param string $packageName
      * @return array
-     * @throws \Composer\Json\JsonValidationException
+     * @throws JsonValidationException
      */
     private function getRawRecipes(string $packageName)
     {
@@ -91,19 +96,23 @@ class CookBook
         $filename = sprintf(self::RECIPE_FILE, $packageName);
         $file = new JsonFile($filename, null, $this->io);
         if ($file->exists()) {
+            $this->io->write("$packageName has recipe.json file.", true, $this->io::VERBOSE);
+
             if ($file->validateSchema(JsonFile::STRICT_SCHEMA, __DIR__ . '/../resources/schemas/root.json')) {
                 $config = $file->read();
+                $this->io->write("$packageName has valid recipe.json file.", true, $this->io::VERBOSE);
 
                 if ($config->recipe->type === 'cookbook') {
                     $rawRecipes = $config->actions;
-                } elseif ($this->io->isVeryVerbose()) {
-                    $this->io->write("$packageName has recipe.json file, but not of cookbook type.");
+                    $this->io->write("$packageName has CookBook recipe file.", true, $this->io::VERBOSE);
+                } else {
+                    $this->io->write("$packageName has recipe.json file, but not of cookbook type.", true, $this->io::VERBOSE);
                 }
-            } elseif ($this->io->isVeryVerbose()) {
-                $this->io->write("$packageName has invalid recipe.json file.");
+            } else {
+                $this->io->write("$packageName has invalid recipe.json file.", true, $this->io::VERBOSE);
             }
-        } elseif ($this->io->isVeryVerbose()) {
-            $this->io->write("$packageName has not recipe.json file.");
+        } else {
+            $this->io->write("$packageName has not recipe.json file.", true, $this->io::VERBOSE);
         }
 
         return $rawRecipes;
