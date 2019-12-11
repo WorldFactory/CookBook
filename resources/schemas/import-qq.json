@@ -6,8 +6,7 @@
   "title": "The Root Schema",
   "required": [
     "type",
-    "source",
-    "target"
+    "source"
   ],
   "properties": {
     "type": {
