@@ -19,7 +19,8 @@ class CookBook
         'copy-file' => 'WorldFactory\CookBook\Recipes\CopyFileRecipe',
         'chmod-file' => 'WorldFactory\CookBook\Recipes\ChmodFileRecipe',
         'create-folder' => 'WorldFactory\CookBook\Recipes\CreateFolderRecipe',
-        'display-message' => 'WorldFactory\CookBook\Recipes\DisplayMessageRecipe'
+        'display-message' => 'WorldFactory\CookBook\Recipes\DisplayMessageRecipe',
+        'import-qq' => 'WorldFactory\CookBook\Recipes\ImportQQRecipe'
     ];
 
     /**
@@ -45,6 +46,7 @@ class CookBook
         $this->recipeFactory = new RecipeFactory($io);
 
         foreach (self::RECIPE_CLASSES as $name => $className) {
+            $this->io->write("Import recipe class : " . $className, $this->io::VERBOSE);
             $this->recipeFactory->addRecipe($name, $className);
         }
     }

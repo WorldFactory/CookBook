@@ -139,7 +139,11 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
             } catch (JsonValidationException $exception) {
                 $this->io->write("<error>Recipe validation errors in {$package->getName()} :</error>");
                 foreach($exception->getErrors() as $error) {
-                    $this->io->write("-> <error>$error</error>");
+                    if (is_array($error)) {
+                        $this->io->write("-> <error>{$exception->getMessage()} : {$error['message']}</error>");
+                    } else {
+                        $this->io->write("-> <error>{$exception->getMessage()} : $error</error>");
+                    }
                 }
             }
         }
