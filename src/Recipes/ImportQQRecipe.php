@@ -9,7 +9,7 @@ class ImportQQRecipe extends AbstractRecipe
 {
     const NAME = 'import-qq';
     const PRIORITY = 5;
-    const TARGET = 'config/qq.yml';
+    const TARGET = 'config/imports.json';
 
     protected function getText() : string
     {
@@ -32,7 +32,17 @@ class ImportQQRecipe extends AbstractRecipe
             throw new Exception("Unable to execute recipe for package '{$this->package->getName()}', file not found : $source");
         }
 
-        // @todo Add import line in qq.yml file.
+        if (file_exists(self::TARGET)) {
+            $imports = json_decode(file_get_contents(self::TARGET));
+        } else {
+            $imports = array();
+        }
+
+        if (!in_array($source, $imports)) {
+            $imports[] = $source;
+
+            file_put_contents(self::TARGET, json_encode($imports));
+        }
     }
 
     protected function getSource() : string
