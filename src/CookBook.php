@@ -20,7 +20,8 @@ class CookBook
         'chmod-file' => 'WorldFactory\CookBook\Recipes\ChmodFileRecipe',
         'create-folder' => 'WorldFactory\CookBook\Recipes\CreateFolderRecipe',
         'display-message' => 'WorldFactory\CookBook\Recipes\DisplayMessageRecipe',
-        'import-qq' => 'WorldFactory\CookBook\Recipes\ImportQQRecipe'
+        'import-qq' => 'WorldFactory\CookBook\Recipes\ImportQQRecipe',
+        'install-symfony-bundle' => 'WorldFactory\CookBook\Recipes\InstallSymfonyBundleRecipe'
     ];
 
     /**

@@ -1,0 +1,33 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "recipe:install-symfony-bundle",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "type",
+    "class"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The Type Schema",
+      "default": "",
+      "examples": [
+        "install-symfony-bundle"
+      ],
+      "pattern": "^install-symfony-bundle$"
+    },
+    "class": {
+      "$id": "#/properties/class",
+      "type": "string",
+      "title": "The Class Schema",
+      "default": "",
+      "examples": [
+        "Acme\\Demo\\AcmeDemoBundle"
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}
