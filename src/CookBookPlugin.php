@@ -118,12 +118,16 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     {
         require_once './vendor/autoload.php';
 
-        $cookbook = new CookBook($this->composer, $this->io);
+        if (class_exists('WorldFactory\CookBook\CookBook')) {
+            $cookbook = new CookBook($this->composer, $this->io);
 
-        $this->installPackageRecipes($cookbook, $this->installedPackages);
-        $this->installPackageRecipes($cookbook, $this->updatedPackages);
+            $this->installPackageRecipes($cookbook, $this->installedPackages);
+            $this->installPackageRecipes($cookbook, $this->updatedPackages);
 
-        $cookbook->run();
+            $cookbook->run();
+        } else {
+            $this->io->write('<options=bold>CookBook</> left the place.');
+        }
     }
 
     /**
