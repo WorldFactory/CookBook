@@ -41,7 +41,7 @@ class ImportQQRecipe extends AbstractRecipe
         if (!in_array($source, $imports)) {
             $imports[] = $source;
 
-            file_put_contents(self::TARGET, json_encode($imports));
+            file_put_contents(self::TARGET, json_encode($imports, JSON_PRETTY_PRINT));
         }
     }
 
