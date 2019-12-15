@@ -47,7 +47,7 @@ class CookBook
         $this->recipeFactory = new RecipeFactory($io);
 
         foreach (self::RECIPE_CLASSES as $name => $className) {
-            $this->io->write("Import recipe class : " . $className, $this->io::VERBOSE);
+            $this->io->write("Import recipe class : " . $className, $this->io::VERY_VERBOSE);
             $this->recipeFactory->addRecipe($name, $className);
         }
     }
