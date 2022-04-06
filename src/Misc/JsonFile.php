@@ -13,7 +13,7 @@ class JsonFile extends ComposerJsonFile
     /**
      * @inheritdoc
      */
-    public function validateSchema($schema = self::STRICT_SCHEMA, $schemaFile = null)
+    public function validateSchema(int $schema = self::STRICT_SCHEMA, ?string $schemaFile = null) : bool
     {
         $content = file_get_contents($this->getPath());
         $data = json_decode($content);
@@ -57,7 +57,7 @@ class JsonFile extends ComposerJsonFile
     /**
      * @inheritdoc
      */
-    public static function parseJson($json, $file = null)
+    public static function parseJson(?string $json, ?string $file = null)
     {
         if (null === $json) {
             return;
