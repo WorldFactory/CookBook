@@ -49,6 +49,16 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
         $this->io = $io;
     }
 
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+        $this->composer = null;
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+        // TODO: Implement uninstall() method.
+    }
+
     /**
      * @return array
      */
@@ -118,7 +128,7 @@ class CookBookPlugin implements PluginInterface, EventSubscriberInterface
     {
         require_once './vendor/autoload.php';
 
-        if (class_exists('WorldFactory\CookBook\CookBook')) {
+        if (($this->composer !== null) && class_exists('WorldFactory\CookBook\CookBook')) {
             $cookbook = new CookBook($this->composer, $this->io);
 
             $this->installPackageRecipes($cookbook, $this->installedPackages);
